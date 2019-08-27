@@ -1,0 +1,29 @@
+题目描述：
+给定一个只包括 '('，')'，'{'，'}'，'['，']' 的字符串，判断字符串是否有效。有效字符串需满足：
+左括号必须用相同类型的右括号闭合。
+左括号必须以正确的顺序闭合。
+代码思路：如果只有一种括号，可以记录左括号值+1，遇到右括号-1，中途不能<0，最终为0，则为true。
+         多种括号时，不能用以上方法，因为无法识别（[)],此时可以考虑栈，遍历时先于栈顶元素比较是否是有效括号，有效则消去（即栈顶出）。
+无效则入栈，最后判断栈是否为空，如果为空则为true,否则为false。
+bool isValid(string s) {
+        stack<char> store;
+        map<char,char> cha;
+        cha[(')')]='(';
+        cha[(']')]='[';
+        cha[('}')]='{';
+        for(int i=0;i<s.size();i++){
+            if(!store.empty()){
+                if(store.top()==cha[s[i]]){
+                    store.pop();
+                }
+                else{
+                    store.push(s[i]);
+                }               
+            }
+            else{
+                store.push(s[i]);
+            }
+        }
+        bool result=store.empty()?true:false;
+        return result;
+    }
