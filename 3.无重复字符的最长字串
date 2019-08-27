@@ -1,0 +1,23 @@
+题目描述：给定一个字符串，请你找出其中不含有重复字符的 最长子串 的长度。
+代码思路：暴力法：遍历所有字串，判断是否有重复的，记录最大长度 O(N^3)
+         辅助数组的暴力法：遍历第i位置之后的子串，每次遍历将已遍历的字串存在数组（ASCII）或者set中，遇到重复的停止记下最大长度，时间复杂度O（n^2），空间复杂度O（n）
+         滑动窗口：可用于解决字符串、数组最大值的问题。
+    int lengthOfLongestSubstring(string s) {
+        int max=0;         
+        for(int i=0;i<s.size();i++){
+                int array[256]={0};
+                int num=0;
+                for(int j=i;j<s.size();j++){
+                    if(array[s[j]]==0){
+                        num++;
+                        array[s[j]]=1;
+                    }
+                    else{
+                        break;
+                    }
+                }
+                if(num>max)
+                    max=num;
+        }
+        return max;        
+    }
