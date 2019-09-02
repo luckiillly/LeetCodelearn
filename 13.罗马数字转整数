@@ -1,0 +1,29 @@
+题目描述：罗马数字包含以下七种字符: I， V， X， L，C，D 和 M，分别代表1，5，10，50，100，500，1000。
+通常情况下，罗马数字中小的数字在大的数字的右边。但也存在特例，例如 4 不写做 IIII，而是 IV。
+数字 1 在数字 5 的左边，所表示的数等于大数 5 减小数 1 得到的数值 4 。同样地，数字 9 表示为 IX。
+给定一个罗马数字，将其转换成整数。
+代码思路：使用map记录罗马字符和数字的对应情况，前一个字符比后面字符小则-，否则+
+int romanToInt(string s) {
+        int length=s.size();
+        if(length==0)
+            return 0;
+        int result=0;
+        map<char,int> mode;
+        mode.insert(pair<char,int>('I',1));
+        mode.insert(pair<char,int>('V',5));
+        mode.insert(pair<char,int>('X',10));
+        mode.insert(pair<char,int>('L',50));
+        mode.insert(pair<char,int>('C',100));
+        mode.insert(pair<char,int>('D',500));
+        mode.insert(pair<char,int>('M',1000));
+        for(int i=0;i<length-1;i++){
+            if(mode[s[i]]<mode[s[i+1]]){
+                result-=mode[s[i]];
+            }
+            else{
+                result+=mode[s[i]];
+            }
+        }
+        result+=mode[s[length-1]];
+        return result;
+    }
