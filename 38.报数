@@ -1,0 +1,27 @@
+题目描述：报数序列是一个整数序列，按照其中的整数的顺序进行报数，得到下一个数。
+1.     1
+2.     11
+3.     21
+4.     1211
+5.     111221
+1 被读作  "one 1"  ("一个一") , 即 11。
+11 被读作 "two 1s" ("两个一"）, 即 21。
+21 被读作 "one 2",  "one 1" （"一个二" ,  "一个一") , 即 1211。
+代码思路：按照描述迭代，注意迭代过程中变量声明位置不同，代码结构不同对性能有很大影响。
+string countAndSay(int n) {
+        string str="1";
+        string temp="";
+        for(int i=1;i<n;i++){
+            for(int j=0;j<str.size();j++){
+                int num=1;
+                while(j+1<str.size()&&str[j+1]==str[j]){
+                    num++;
+                    j++;
+                }
+                temp=temp+to_string(num)+str[j];
+            }
+            str=temp;
+            temp="";
+        }
+        return str;
+    }
