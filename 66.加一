@@ -1,0 +1,36 @@
+题目描述：给定一个由整数组成的非空数组所表示的非负整数，在该数的基础上加一。
+最高位数字存放在数组的首位， 数组中每个元素只存储单个数字。
+代码思路：设置进位，如果有进位则前一位+1更新进位，如果是9999这种情况vector要变长，这里一种是自己写新的vector重新添加，一种用insert（insert要慢很多）
+vector<int> plusOne(vector<int>& digits) {
+        int add=1,i=digits.size()-1;
+        while(add>0&&i>=0){
+            add=(digits[i]+1)/10;
+            digits[i]=(digits[i]+1)%10;
+            i--;
+        }
+        if(add>0){
+            digits.insert(digits.begin(),1);
+        }
+        return digits;
+    }
+
+
+vector<int> plusOne(vector<int>& digits) {
+        int add=1,i=digits.size()-1;
+        while(add>0&&i>=0){
+            add=(digits[i]+1)/10;
+            digits[i]=(digits[i]+1)%10;
+            i--;
+        }
+        if(add>0){
+            vector<int> result;
+            result.push_back(1);
+            for(int i=0;i<digits.size();i++){
+                result.push_back(digits[i]);
+            }
+            return result;
+        }
+        else{
+            return digits;
+        }
+    }
