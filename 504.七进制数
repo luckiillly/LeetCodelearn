@@ -1,0 +1,24 @@
+题目描述：给定一个整数，将其转化为7进制，并以字符串形式输出。
+代码思路：10进制转其他进制，除于N，倒着读。要考虑正负、0
+string convertToBase7(int num) {
+        bool signal=true;
+        if(num<0){
+            signal=false;
+            num=0-num;
+        }          
+        vector<int> array;
+        while(num>=7){
+            int Yushu=num%7;
+            array.push_back(Yushu);
+            num/=7;
+        }
+        array.push_back(num);
+        string result="";
+        if(!signal){
+            result="-";
+        }
+        for(int i=array.size()-1;i>=0;i--){
+            result+=to_string(array[i]);
+        }
+        return result;
+    }
