@@ -1,0 +1,26 @@
+题目描述：给定两个二进制字符串，返回他们的和（用二进制表示）。
+输入为非空字符串且只包含数字 1 和 0。
+代码思路：和字符串加法类似，将两个字符串补齐，短的前面加0，计算进位和每位值，从后往前遍历
+ string addBinary(string a, string b) {
+        int add=0,i=a.size()-1,j=b.size()-1;
+        int x=0,y=0;
+        string result="";
+        while(i>=0||j>=0){
+            int x=i>=0?a[i]-'0':0;
+            int y=j>=0?b[j]-'0':0;
+            int temp=(x+y+add)%2;
+            add=(x+y+add)/2;
+            if(temp==0){
+                result='0'+result;
+            }
+            else{
+                result='1'+result;
+            }
+            i--;
+            j--;
+        }
+        if(add){
+            result='1'+result; 
+        }
+        return result;
+    }
