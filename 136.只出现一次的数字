@@ -1,0 +1,18 @@
+题目描述：给定一个非空整数数组，除了某个元素只出现一次以外，其余每个元素均出现两次。找出那个只出现了一次的元素。
+说明：
+你的算法应该具有线性时间复杂度。 你可以不使用额外空间来实现吗？
+代码思路：map记录查询的方法 时间复杂度O(n)、空间复杂度O(n)(哈希查找O(1)、红黑树O(logn))
+         异或的方法 时间复杂度O(n) 空间复杂度O(1)
+int singleNumber(vector<int>& nums) {
+        map<int,int> data;
+        for(int i=0;i<nums.size();i++){
+            if(data.count(nums[i])==0){
+                data.insert(pair<int,int>(nums[i],1));
+            }
+            else{
+                data.erase(nums[i]);
+            }
+        }
+        auto result=data.begin();
+        return result->first;
+    }
