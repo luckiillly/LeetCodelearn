@@ -1,0 +1,33 @@
+题目描述：请判断一个链表是否为回文链表。
+代码思路：先通过快慢指针找到链表的中点，然后反转前半部分或者后半部分，再从头和中点遍历判断是否回文。
+（链表反转的时候迭代法标记pre、cur、next可以更好理解如何反转）
+bool isPalindrome(ListNode* head) {
+        if(!head||!head->next)
+            return true;
+        ListNode *fast=head;
+        ListNode *low=head;
+        while(fast->next&&fast->next->next){
+            fast=fast->next->next;
+            low=low->next;
+        }
+        ListNode * pre=nullptr;
+        ListNode * cur=low->next;
+        while(cur->next){
+            ListNode * next=cur->next;
+            cur->next=pre;
+            pre=cur;
+            cur=next;
+        }
+        cur->next=pre;
+        low->next=cur;
+        while(cur){
+            if(head->val==cur->val){
+                head=head->next;
+                cur=cur->next;
+            }
+            else{
+                return false;
+            }
+        }
+        return true;
+    }
