@@ -1,0 +1,19 @@
+题目描述：给定一个大小为 n 的数组，找到其中的众数。众数是指在数组中出现次数大于 ⌊ n/2 ⌋ 的元素。
+你可以假设数组是非空的，并且给定的数组总是存在众数。
+代码思路：暴力法遍历两次；hash法记录次数，找到大于n/2的元素；
+         摩尔投票法：遍历一遍，记录signal和次数，如果遍历到的值和signal相同则+1，否则-1，如果count为0，则更换新的signal(原理是众数会大于n/2)
+  int majorityElement(vector<int>& nums) {
+        int signal=nums[0],count=1;
+        for(int i=1;i<nums.size();i++){
+            if(count==0){
+                signal=nums[i];
+            }
+            if(nums[i]==signal){
+                count++;
+            }
+            else{
+                count--;
+            }
+        }
+        return signal;
+    }
