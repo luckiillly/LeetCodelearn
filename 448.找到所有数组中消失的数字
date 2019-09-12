@@ -1,0 +1,28 @@
+题目描述：给定一个范围在  1 ≤ a[i] ≤ n ( n = 数组大小 ) 的 整型数组，数组中的元素一些出现了两次，另一些只出现一次。
+找到所有在 [1, n] 范围之间没有出现在数组中的数字。
+代码思路：桶计数的方法 时间复杂度 空间复杂度都为O（n）
+vector<int> findDisappearedNumbers(vector<int>& nums) {
+        vector<int> arr(nums.size(),0);
+        for(int i=0;i<nums.size();i++){
+            if(arr[nums[i]-1]==0)
+                arr[nums[i]-1]=1;
+        }
+        vector<int> result;
+        for(int j=0;j<arr.size();j++){
+            if(arr[j]==0)
+                result.push_back(j+1);
+        }
+        return result;
+    }
+ 遍历数组，数组值对应排序的位置的数值加上一个数组长度，则不存在的数的位置的值没加过，一直小于数组长度，注意取值时要模上数组长度，后续值改变了
+ vector<int> findDisappearedNumbers(vector<int>& nums) {
+        for(int i=0;i<nums.size();i++){
+            nums[(nums[i]-1)%nums.size()]+=nums.size();
+        }
+        vector<int> result;
+        for(int j=0;j<nums.size();j++){
+            if(nums[j]<=nums.size())
+                result.push_back(j+1);
+        }
+        return result;
+    }
