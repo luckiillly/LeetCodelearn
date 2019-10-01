@@ -23,3 +23,13 @@ int maxProfit(vector<int>& prices) {
         sum+=add;
         return sum;
     }
+贪心法：
+牛逼！！！
+int maxProfit(vector<int>& prices) {
+        int maxprofit = 0;
+        for (int i = 1; i < prices.length; i++) {
+            if (prices[i] > prices[i - 1])
+                maxprofit += prices[i] - prices[i - 1];
+        }
+        return maxprofit;
+    }
