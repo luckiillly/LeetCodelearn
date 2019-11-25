@@ -1,0 +1,17 @@
+题目描述：给定一棵二叉树，你需要计算它的直径长度。一棵二叉树的直径长度是任意两个结点路径长度中的最大值。这条路径可能穿过根结点。
+代码思路：最长的路径，要遍历每个结点，得到经过每个结点的最大路径，每个结点的最大路径可以递归的求左右子树的深度+1
+int num;
+int deepTree(TreeNode* root){
+    if(root==NULL){
+        return 0;
+    }
+    int L=deepTree(root->left);
+    int R=deepTree(root->right);
+    num=max(num,L+R+1);
+    return max(L,R)+1;
+}
+int diameterOfBinaryTree(TreeNode* root) {
+    num=1;
+    deepTree(root);
+    return num-1;
+}
